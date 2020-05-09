@@ -39,13 +39,17 @@
 
       <form class="form-signin" name="form1">
         <h2 class="form-signin-heading">Create Account</h2>
-        <input name="myusername" id="myusername" type="name" class="form-control" placeholder="Name" autofocus style="margin-bottom:10px;">
+        <input name="myusername" id="username" type="name" class="form-control" placeholder="Name" autofocus style="margin-bottom:10px;">
         <input name="myemail" id="email" type="email" class="form-control" placeholder="Email ID" autofocus style="margin-bottom:10px;">
-        <input name="mypassword" id="password" type="password" class="form-control" placeholder="Confirm Password">
-         <input name="retypepwd" id="password2" type="password" class="form-control" placeholder="Re-Type Password">
-        <button name="Submit" class="btn btn-lg btn-primary btn-block" onclick="new_account">Create</button>
-
+        <input name="mypassword" id="password1" type="password" class="form-control" placeholder="Confirm Password">
+        <input name="retypepwd" id="password2" type="password" class="form-control" placeholder="Re-Type Password">
       </form>
   </div>
+
+  <div style="margin:auto;text-align:center;">
+    <a class="btn btn-lg btn-primary" onclick="new_account()" style="width:300px;">Create</a><br><br>
+    <a href="/login">Already have account?  <i>Login.</i></a>
+  </div>
+
   </body>
 </html>

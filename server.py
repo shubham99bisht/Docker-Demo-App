@@ -1,7 +1,9 @@
 from flask import Flask, render_template
 app = Flask(__name__)
+app.debug = True
 
 @app.route('/')
+@app.route('/login')
 def initial():
     return render_template("login.html")
 
@@ -9,9 +11,9 @@ def initial():
 def index():
     return render_template("index.html")
 
-@app.route('/register_form')
-def register_form():
-    return render_template("register_form.html", error='')
+@app.route('/signup')
+def signup():
+    return render_template("signup.html", error='')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
