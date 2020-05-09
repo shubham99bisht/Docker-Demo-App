@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- <meta charset="utf-8"> -->
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>Register</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="../static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="../static/css/main.css" rel="stylesheet" media="screen">
+
+    <!-- FIREBASE -->
+    <!-- https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-database.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyDZcuNdPSQC71ax2Z4UD4b9tJ7518MZY3I",
+        authDomain: "fir-docker.firebaseapp.com",
+        databaseURL: "https://fir-docker.firebaseio.com",
+        projectId: "fir-docker",
+        storageBucket: "fir-docker.appspot.com",
+        messagingSenderId: "632576106717",
+        appId: "1:632576106717:web:be79ced3901cf68c0cbb34"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <script src="./static/scripts/firebase.js"></script>
+
+  </head>
+
+  <body>
+    <div class="container">
+
+      <form class="form-signin" name="form1">
+        <h2 class="form-signin-heading">Create Account</h2>
+        <input name="myusername" id="myusername" type="name" class="form-control" placeholder="Name" autofocus style="margin-bottom:10px;">
+        <input name="myemail" id="email" type="email" class="form-control" placeholder="Email ID" autofocus style="margin-bottom:10px;">
+        <input name="mypassword" id="password" type="password" class="form-control" placeholder="Confirm Password">
+         <input name="retypepwd" id="password2" type="password" class="form-control" placeholder="Re-Type Password">
+        <button name="Submit" class="btn btn-lg btn-primary btn-block" onclick="new_account">Create</button>
+
+      </form>
+  </div>
+  </body>
+</html>
