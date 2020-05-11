@@ -16,7 +16,14 @@ function Fill_Tasks()
 	var user = firebase.auth().currentUser;
 	var userid = user.uid;
 	var ref = firebase.database().ref('Data/'+userid);
-  // <li>Hit the gym<a onclick="alert(\'Delete me?\');"><span class="close">×</span></a></li>
+
+
+  // <div class="alert alert-secondary checked" style="font-size: 18px;">
+  //   <a onclick="Checked(id)"> You should check in on some of those fields below.</a>
+  //   <button type="button" class="close"  onclick="alert(id)">
+  //     <span aria-hidden="true">&times;</span>
+  //   </button>
+  // </div>
 
   getUser();
 
@@ -25,38 +32,57 @@ function Fill_Tasks()
 			console.log(jsn);
 			document.getElementById("myUL").innerHTML = "";
 
+      var color = "alert-primary"
+
 			for (var task_id in jsn)
 		  {   console.log(jsn[task_id]);
-          var g = document.createElement('li');
-          g.id = task_id;
-          g.addEventListener("click", Checked);
-          if(jsn["status"]==1){
-            g.classList.add("checked");
-          }
-					var task = jsn[task_id]["task"];
 
-		      document.getElementById("myUL").appendChild(g);
-		      var abc = task + '<a onclick="alert(\'Delete me?\');"><span class="close">×</span></a>';
-		      document.getElementById(g.id).innerHTML=abc;
+          if(jsn[task_id]["delete"]==1){
+            delete_task(task_id);
+          }
+          else{
+            if(color=="alert-secondary"){color="alert-primary"}
+            else{color="alert-secondary"}
+
+            var g = document.createElement('div');
+            g.classList.add("alert");
+            g.classList.add(color);
+            g.classList.add("alert-dismissible");
+            if(jsn[task_id]["status"]==1){g.classList.add("checked");}
+            g.id = task_id;
+
+            var a1 = '<a onclick="Checked(' + task_id+ "," + jsn[task_id]["status"] + ')">' + jsn[task_id]["task"] + '</a>'
+            var a2 = '<button type="button" class="close"  onclick="delete_task(' + task_id +')"><span aria-hidden="true">&times;</span></button>'
+
+  		      document.getElementById("myUL").appendChild(g);
+  		      var abc = a1 + a2;
+  		      document.getElementById(g.id).innerHTML=abc;
+          }
 		   }
 	});
 }
 
 
-Add a "checked" symbol when clicking on a list item
-var list = document.querySelector('ul');
-var list = document.getElementById("myUL");
-list.addEventListener('click', function(ev) {
-  if (ev.target.tagName === 'LI') {
-    ev.target.classList.toggle('checked');
-  }
-}, false);
+function Checked(tid, status){
+    userid = document.getElementById("uid").value;
+    if(status==1){status=0;}
+    else{status=1;}
 
-
-function Checked(){
-  alert("LUL!");
+    firebase.database().ref('Data/'+userid +'/'+ tid).update({
+      "status": status
+    });
 }
 
+
+function delete_task(id) {
+	var user = firebase.auth().currentUser;
+	var r = confirm("Do you want to delete Task Id: "+id+"?");
+  if(r){
+		console.log(id);
+		firebase.database().ref('Data/' + user.uid +'/'+ id).remove();
+		// document.getElementById(id).style.display="none";
+  }
+}
 
 // Create a new list item when clicking on the "Add" button
 function newElement() {
